@@ -10,9 +10,11 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// get mongooseDB and login
 const mongoose = require('mongoose');
 mongoose.connect('mongodb+srv://admin:admin@cluster0.g9bhw.mongodb.net/DB14');
 
+// add names to DB on mongoose
 const movieSchema = new mongoose.Schema({
     title: String,
     year: String,
@@ -30,6 +32,18 @@ app.post('/api/movies', async (req, res)=>{
     await newMovie.save();
    
     res.status(201).json({ message: 'Movie created successfully', movie: newMovie });
+});
+
+// gets a specific by it ID
+app.get('/api/movie/:id', async (req, res) => {
+    let movie = await Movie.findById(req.params.id );
+    res.send(movie);
+});
+
+// update the movies on the database
+app.put('/api/movie/:id', async (req, res) => {
+    let movie = await Movie.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.send(movie);
 });
 
 // get json of all movies
