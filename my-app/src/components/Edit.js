@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
-// 
+// get old text of movies to edit
 export default function Edit(props) {
   let { id } = useParams();
   const [title, setTitle] = useState("");
@@ -25,7 +25,7 @@ useEffect(() => {
         });
 }, [id]);
 
-// 
+// submit updated movie send to the DB
 const handleSubmit = (event) => {
     event.preventDefault();
     const newMovie = { id, title, year, poster };
@@ -36,6 +36,7 @@ const handleSubmit = (event) => {
         });
 }
 
+// return html of the Edit of movie Handle Submit
 return (
     <div>
         <form onSubmit={handleSubmit}>

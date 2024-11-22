@@ -72,7 +72,7 @@ app.get('/', (req, res) => {
     res.send('Hello World');
 });
 
-/* json of movies
+/* json of movies // old DB of json
 app.get('/api/movies', (req, res) => {
     const movies = [
             {
